@@ -1,0 +1,20 @@
+$brand-primary: #2899d5;
+$brand-secondary: #333333;
+$brand-darkblue: #30353b;
+
+$font-primary: 'Dosis', sans-serif;
+$font-secondary: 'Dosis', sans-serif;
+
+//* BREAKPOINTS
+$breakpoints: (
+	laptop-large	: 1920px,
+	laptop-medium	: 1440px,
+	laptop-small	: 1366px,
+	laptop-xsmall   : 1200px,
+	tablet-landscape: 1024px,
+	tablet-portrait	: 768px,
+	mobile-xlarge	: 720px,
+	mobile-large	: 425px,
+	mobile-medium	: 375px,
+	mobile-small	: 320px
+);
