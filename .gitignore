@@ -28,3 +28,5 @@ wp-config.php
 # ignore node/grunt dependency directories
 node_modules/
 
+# ignore package-lock.json
+/wp-content/themes/jylland-theme/package-lock.json
