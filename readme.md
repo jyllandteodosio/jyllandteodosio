@@ -1,7 +1,8 @@
 <html lang="en">
-<body>
-<h1>
-	Jylland Teodosio - Portfolio Website
-</h1>
-</body>
+    <body>
+        <h1>
+            Jylland Teodosio
+        </h1>
+        <p>Repository for my portfolio website.</p>
+    </body>
 </html>
