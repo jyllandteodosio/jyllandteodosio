@@ -22,23 +22,40 @@
         <?php wp_head(); ?>
     </head>
 
+<!--    <body <?php body_class( 'work-detail-body' ); ?>>-->
     <body <?php body_class(); ?>>
         <div id="page" class="site">
 
             <header id="masthead" class="site-header" role="banner">
 
-                <?php if ( has_nav_menu( 'primary-menu' ) ) : ?>
-                <div class="navigation-top">
-                    <div class="wrap">
-                        <?php wp_nav_menu( array(
-                            'theme_location' => 'primary-menu',
-                            'menu_id'        => 'primary-menu',
-                        ) ); ?>
+                <div class="wrap">
+                    <h1 class="site-logo">
+                        <?php echo get_field( 'banner_logo' ); ?>
+                    </h1>
+
+                    <div class="navigation-container">
+                        <ul class="navigation">
+                            <li class="iterator current">
+                                <a class="iterator-banner">home</a>
+                                <div class="current-border"></div>
+                            </li>
+                            <li class="iterator">
+                                <a class="iterator-about">about</a>
+                                <div class="current-border"></div>
+                            </li>
+                            <li class="iterator">
+                                <a class="iterator-works">works</a>
+                                <div class="current-border"></div>
+                            </li>
+                            <li class="iterator">
+                                <a class="iterator-contact">contact</a>
+                                <div class="current-border"></div>
+                            </li>
+                        </ul>
                     </div>
+
                 </div>
-                <?php endif; ?>
 
             </header>
 
-            <div class="site-content-contain">
-                <div id="content" class="site-content">
+            <div id="content" class="site-content">

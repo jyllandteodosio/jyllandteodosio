@@ -16,21 +16,21 @@
 
 		</div>
 
+    <?php /*
 		<footer class="site-footer" role="contentinfo">
 			<div class="wrap">
 				<?php if ( has_nav_menu( 'primary-menu' ) ) : ?>
                 <div class="navigation-top">
-                    <div class="wrap">
                         <?php wp_nav_menu( array(
                             'theme_location' => 'primary-menu',
                             'menu_id'        => 'primary-menu',
                         ) ); ?>
-                    </div>
                 </div>
                 <?php endif; ?>
 			</div>
 		</footer>
-	</div>
+        
+    */ ?>
 </div>
 <?php wp_footer(); ?>
 
