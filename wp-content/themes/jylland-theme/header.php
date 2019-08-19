@@ -22,7 +22,6 @@
         <?php wp_head(); ?>
     </head>
 
-<!--    <body <?php body_class( 'work-detail-body' ); ?>>-->
     <body <?php body_class(); ?>>
         <div id="page" class="site">
 
@@ -30,25 +29,25 @@
 
                 <div class="wrap">
                     <h1 class="site-logo">
-                        <?php echo get_field( 'banner_logo' ); ?>
+                        jt
                     </h1>
 
                     <div class="navigation-container">
                         <ul class="navigation">
                             <li class="iterator current">
-                                <a class="iterator-banner">home</a>
+                                <a class="iterator-banner" href="#home">home</a>
                                 <div class="current-border"></div>
                             </li>
                             <li class="iterator">
-                                <a class="iterator-about">about</a>
+                                <a class="iterator-about" href="#about">about</a>
                                 <div class="current-border"></div>
                             </li>
                             <li class="iterator">
-                                <a class="iterator-works">works</a>
+                                <a class="iterator-works" href="#works">works</a>
                                 <div class="current-border"></div>
                             </li>
                             <li class="iterator">
-                                <a class="iterator-contact">contact</a>
+                                <a class="iterator-contact" href="#contact">contact</a>
                                 <div class="current-border"></div>
                             </li>
                         </ul>
