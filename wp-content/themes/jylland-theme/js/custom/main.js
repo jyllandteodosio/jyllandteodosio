@@ -261,7 +261,7 @@ jQuery(document).ready(function($) {
         tlWorkTransition
             .to(workTransition, 0, { display: "block" })
             .fromTo(workTransition, 1, { top: "-100vh" }, { top: "0", ease: "smoothEase" }, 0.2)
-            .to(workDetail, 1, { height: "100vh", display: "block", ease: "smoothEase" }, 0.4)
+            .to(workDetail, 1, { display: "block", ease: "smoothEase" }, 0.4)
 //            .from(workDetailTitle, 0.5, { y: "-50", ease: "smoothEase" }, 0.5)
 //            .from(workTypeLabel, 0.5, { y: "-50", ease: "smoothEase" }, 0.7)
 //            .from(workTypeList, 0.5, { y: "-50", ease: "smoothEase" }, 0.7)
