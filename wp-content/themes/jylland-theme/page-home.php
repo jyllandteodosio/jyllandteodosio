@@ -8,7 +8,16 @@ get_header(); ?>
 
 <main id="main" class="site-main" role="main">
 
-    <section class="banner-section">
+    <section class="transition-section">
+        <div class="logo-intro-wrap">
+            <div class="logo-intro">jt</div>
+            <div class="logo-intro-bg"></div>
+        </div>
+        <div class="scroll-text">SCROLL</div>
+        <div class="scroll-line"></div>
+    </section>
+
+    <section class="banner-section" id="home">
         <div class="wrap">
             <div class="banner-container">
                 <div class="banner-logo">
@@ -22,7 +31,7 @@ get_header(); ?>
         </div>
     </section>
 
-    <section class="about-section">
+    <section class="about-section" id="about">
         <div class="wrap">
             <div class="about-wrap">
                 <h2 class="section-title">
@@ -35,8 +44,7 @@ get_header(); ?>
         </div>
     </section>
 
-
-    <section class="works-section">
+    <section class="works-section" id="works">
         <div class="wrap">
             <div class="works-container">
                 <h2 class="section-title">
@@ -58,8 +66,10 @@ get_header(); ?>
                     ?>
 
                     <div class="works-item" id="<?php echo get_the_ID();?>">
-                        <h3 class="works-title"><?php echo get_the_title(); ?></h3>
-                        <div class="works-border"></div>
+                        <div class="works-title">
+                            <h3><?php echo get_the_title(); ?></h3>
+                            <div class="works-border"></div>
+                        </div>
                     </div>
 
                     <?php
@@ -74,7 +84,8 @@ get_header(); ?>
             </div>
         </div>
     </section>
-
+    
+    <section class="work-transition"></section>
 
     <?php 
     if( $works_query->have_posts() ):
@@ -90,15 +101,15 @@ get_header(); ?>
                 <div class="work-detail-content">
 
                     <?php if( get_field( 'work_type' ) ): ?>
-                    <label class="work-label">Type</label>
-                    <div class="work-detail-list">
+                    <label class="work-label type-label">Type</label>
+                    <div class="work-detail-list type-list">
                         <?php echo get_field( 'work_type' ); ?>
                     </div>
                     <?php endif; ?>
 
                     <?php if( get_field( 'work_role' ) ): ?>
-                    <label class="work-label">Role</label>
-                    <div class="work-detail-list">
+                    <label class="work-label role-label">Role</label>
+                    <div class="work-detail-list role-list">
                         <?php echo get_field( 'work_role' ); ?>
                     </div>
                     <?php endif; ?>
@@ -113,7 +124,7 @@ get_header(); ?>
                     while( have_rows( 'work_images' ) ): the_row();
                     ?>
 
-                    <img src="<?php echo get_sub_field('work_image', get_the_ID()); ?>" alt="<?php echo get_the_title(); ?>"/>
+                    <img class="work-image" src="<?php echo get_sub_field('work_image', get_the_ID()); ?>" alt="<?php echo get_the_title(); ?>"/>
 
                     <?php
                     endwhile;
@@ -135,7 +146,7 @@ get_header(); ?>
     endif;
     ?>
 
-    <section class="contact-section">
+    <section class="contact-section" id="contact">
         <div class="wrap">
             <div class="contact-wrap">
                 <h2 class="section-title">
