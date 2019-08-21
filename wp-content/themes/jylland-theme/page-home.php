@@ -84,7 +84,7 @@ get_header(); ?>
             </div>
         </div>
     </section>
-    
+
     <section class="work-transition"></section>
 
     <?php 
@@ -94,44 +94,59 @@ get_header(); ?>
 
     <section class="work-detail" id="work-<?php echo get_the_ID();?>">
 
+        <div class="work-detail-nav">
+
+            <div class="work-detail-logo">jt</div>
+            <div class="work-detail-back">
+                <a class="works-back">works</a>
+            </div>
+
+        </div>
+
         <div class="wrap">
 
             <div class="work-detail-container">
                 <h2 class="work-detail-title"><?php echo get_the_title(); ?></h2>
+
                 <div class="work-detail-content">
 
-                    <?php if( get_field( 'work_type' ) ): ?>
-                    <label class="work-label type-label">Type</label>
-                    <div class="work-detail-list type-list">
-                        <?php echo get_field( 'work_type' ); ?>
+                    <div class="detail-content">
+                        <?php if( get_field( 'work_type' ) ): ?>
+                        <label class="work-label type-label">Type</label>
+                        <div class="work-detail-list type-list">
+                            <?php echo get_field( 'work_type' ); ?>
+                        </div>
+                        <?php endif; ?>
                     </div>
-                    <?php endif; ?>
 
-                    <?php if( get_field( 'work_role' ) ): ?>
-                    <label class="work-label role-label">Role</label>
-                    <div class="work-detail-list role-list">
-                        <?php echo get_field( 'work_role' ); ?>
+                    <div class="detail-content">
+                        <?php if( get_field( 'work_role' ) ): ?>
+                        <label class="work-label role-label">Role</label>
+                        <div class="work-detail-list role-list">
+                            <?php echo get_field( 'work_role' ); ?>
+                        </div>
+                        <?php endif; ?>
                     </div>
-                    <?php endif; ?>
-
-                    <a class="work-detail-link" href="<?php echo get_field('work_link', get_the_ID()); ?>" target="_blank">Visit Site</a>
 
                 </div>
-                <div class="work-detail-image">
 
-                    <?php 
-                    if( have_rows( 'work_images' ) ): 
-                    while( have_rows( 'work_images' ) ): the_row();
-                    ?>
+                <a class="work-detail-link" href="<?php echo get_field('work_link', get_the_ID()); ?>" target="_blank">Visit Site <i class="fas fa-arrow-right"></i></a>
+            </div>
 
-                    <img class="work-image" src="<?php echo get_sub_field('work_image', get_the_ID()); ?>" alt="<?php echo get_the_title(); ?>"/>
+            <div class="work-detail-image">
 
-                    <?php
-                    endwhile;
-                    endif;
-                    ?>
+                <?php 
+                if( have_rows( 'work_images' ) ): 
+                while( have_rows( 'work_images' ) ): the_row();
+                ?>
 
-                </div>
+                <img class="work-image" src="<?php echo get_sub_field('work_image', get_the_ID()); ?>" alt="<?php echo get_the_title(); ?>"/>
+
+                <?php
+                endwhile;
+                endif;
+                ?>
+
             </div>
 
         </div>

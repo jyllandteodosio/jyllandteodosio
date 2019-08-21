@@ -34,20 +34,20 @@
 
                     <div class="navigation-container">
                         <ul class="navigation">
-                            <li class="iterator current">
-                                <a class="iterator-banner" href="#home">home</a>
+                            <li class="iterator iterator-banner current" data-state="1">
+                                <a class="" href="#home">home</a>
                                 <div class="current-border"></div>
                             </li>
-                            <li class="iterator">
-                                <a class="iterator-about" href="#about">about</a>
+                            <li class="iterator iterator-about" data-state="2">
+                                <a class="" href="#about">about</a>
                                 <div class="current-border"></div>
                             </li>
-                            <li class="iterator">
-                                <a class="iterator-works" href="#works">works</a>
+                            <li class="iterator iterator-works" data-state="3">
+                                <a class="" href="#works">works</a>
                                 <div class="current-border"></div>
                             </li>
-                            <li class="iterator">
-                                <a class="iterator-contact" href="#contact">contact</a>
+                            <li class="iterator iterator-contact" data-state="4">
+                                <a class="" href="#contact">contact</a>
                                 <div class="current-border"></div>
                             </li>
                         </ul>
