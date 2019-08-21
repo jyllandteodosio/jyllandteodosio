@@ -14,12 +14,15 @@
 
 get_header(); ?>
 
-<div id="primary" class="content-area">
-	<main id="main" class="site-main" role="main">
+<main id="main" class="site-main" role="main">
 
-		404
+    <section class="error-section">
+        <div class="wrap">
+            <div class="section-title">error 404</div>
+            <a class="home-link" href="<?php echo get_home_url(); ?>">Home</a>
+        </div>
+    </section>
 
-	</main><!-- #main -->
-</div><!-- #primary -->
+</main>
 
 <?php get_footer();
