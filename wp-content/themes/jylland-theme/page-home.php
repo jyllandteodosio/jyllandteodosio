@@ -130,7 +130,9 @@ get_header(); ?>
 
                 </div>
 
+                <?php if( get_field( 'work_link', get_the_ID() ) ): ?>
                 <a class="work-detail-link" href="<?php echo get_field('work_link', get_the_ID()); ?>" target="_blank">Visit Site <i class="fas fa-arrow-right"></i></a>
+                <?php endif; ?>
             </div>
 
             <div class="work-detail-image">

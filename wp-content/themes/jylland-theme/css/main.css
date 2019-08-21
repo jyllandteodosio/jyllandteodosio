@@ -489,6 +489,34 @@ section {
   .contact-social a:hover, .contact-social a:active, .contact-social a:focus {
     color: #a5486d; }
 
+.error404 {
+  background-color: #333; }
+
+.error-section {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+     -moz-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center; }
+  .error-section .section-title {
+    margin-top: 100px;
+    margin-bottom: 80px;
+    font-weight: 600;
+    font-size: 48px;
+    opacity: .5; }
+  .error-section .home-link {
+    font-weight: 600;
+    color: #d88fac;
+    text-transform: lowercase; }
+
 @media screen and (max-width: 1024px) {
   .banner-section .banner-logo {
     font-size: 72px; }
