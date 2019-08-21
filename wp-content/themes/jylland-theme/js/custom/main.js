@@ -21,15 +21,6 @@ jQuery(document).ready(function($) {
 
     CustomEase.create("smoothEase", "M0,0c0.2,0.6,0.1,1,1,1");
 
-    //    $("body").niceScroll({
-    //        smoothscroll: true,
-    //        scrollspeed: 180,
-    //        cursorcolor: "#a5486d",
-    //        cursorwidth: "10px",
-    //        background: "rgba(255,255,255,0.6)",
-    //        cursorborder: "none",
-    //    });
-
 
     // Variables
 
@@ -49,16 +40,23 @@ jQuery(document).ready(function($) {
         aboutContainer = $('.about-container'),
         worksSection = $('.works-section'),
         worksTitle = $('.works-title-wrap'),
-        workItem = $('.works-item');
+        workItem = $('.works-item'),
+        contactSection = $('.contact-section'),
+        contactTitle = $('.contact-title-wrap'),
+        contactContainer = $('.contact-container'),
+        contactSocial = $('.contact-social');
 
     let tlIntroIn = new TimelineMax({ paused: true }),
         tlIntroOut = new TimelineMax({ paused: true }),
+        tlHeaderIn = new TimelineMax({ paused: true }),
         tlHomeIn = new TimelineMax({ paused: true }),
         tlHomeOut = new TimelineMax({ paused: true }),
         tlAboutIn = new TimelineMax({ paused: true }),
         tlAboutOut = new TimelineMax({ paused: true }),
         tlWorksIn = new TimelineMax({ paused: true }),
-        tlWorksOut = new TimelineMax({ paused: true });
+        tlWorksOut = new TimelineMax({ paused: true }),
+        tlContactIn = new TimelineMax({ paused: true }),
+        tlContactOut = new TimelineMax({ paused: true });
 
 
     // Tweens
@@ -81,11 +79,14 @@ jQuery(document).ready(function($) {
         .to(transitionSection, 0.5, { opacity: 0, ease: "smoothEase" }, 1)
         .to(transitionSection, 0.5, { display: "none" });
 
-    tlHomeIn
-        .from(homeLogo, 0.5, { opacity: 0, y: "-20", ease: "smoothEase" })
-        .from(homeSubtitle, 0.5, { opacity: 0, y: "-20", ease: "smoothEase" }, 0.2)
+    tlHeaderIn
         .from(siteLogo, 0.7, { opacity: 0, y: "-20", ease: "smoothEase" }, 0.6)
         .staggerFrom(iterator, 0.5, { opacity: 0, y: "-20", ease: "smoothEase" }, 0.1);
+
+    tlHomeIn
+        .to(bannerSection, 0, { display: "block" })
+        .from(homeLogo, 0.5, { opacity: 0, y: "-20", ease: "smoothEase" })
+        .from(homeSubtitle, 0.5, { opacity: 0, y: "-20", ease: "smoothEase" }, 0.2);
 
     tlHomeOut
         .to(homeSubtitle, 0.7, { opacity: 0, y: "30", ease: Power4.easeOut })
@@ -112,58 +113,117 @@ jQuery(document).ready(function($) {
         .from(worksTitle, 0.5, { opacity: 0, y: "-20", ease: "smoothEase" })
         .staggerFrom(workItem, 0.5, { opacity: 0, y: "-20", ease: "smoothEase" }, 0.1);
 
+    tlWorksOut
+        .to(workItem, 0.5, { opacity: 0, y: "30", ease: "smoothEase" })
+        .to(worksTitle, 0.5, { opacity: 0, y: "30", ease: "smoothEase" }, 0.2)
+        .to(worksSection, 0, { display: "none" });
+
+    tlContactIn
+        .to(contactSection, 0, { display: "block" })
+        .from(contactTitle, 0.5, { opacity: 0, y: "-20", ease: "smoothEase" })
+        .from(contactContainer, 0.5, { opacity: 0, y: "-20", ease: "smoothEase" }, 0.2)
+        .from(contactSocial, 0.5, { opacity: 0, y: "-20", ease: "smoothEase" }, 0.4);
+
+    tlContactOut
+        .to(contactSocial, 0.5, { opacity: 0, y: "30", ease: "smoothEase" })
+        .to(contactContainer, 0.5, { opacity: 0, y: "30", ease: "smoothEase" }, 0.2)
+        .to(contactTitle, 0.5, { opacity: 0, y: "30", ease: "smoothEase" }, 0.4)
+        .to(contactSection, 0, { display: "none" });
+
     // Animations
 
     function animateIntroIn() {
-        console.log('Animating Intro In');
+        //        console.log('Animating Intro In');
         currentState = 1;
-        tlIntroIn.play();
+        tlIntroIn.play(0);
     }
 
     function animateIntroOut() {
-        console.log('Animating Intro Out');
+        //        console.log('Animating Intro Out');
         tlIntroIn.stop();
-        tlIntroOut.play();
+        tlIntroOut.play(0);
+    }
+
+    function animateHeaderIn() {
+        //        console.log('Animating Header In');
+        tlHeaderIn.play(0);
     }
 
     function animateHomeIn() {
-        console.log('Animating Home In');
-        tlHomeIn.play();
+        //        console.log('Animating Home In');
+        tlHomeIn.play(0);
     }
 
     function animateHomeOut() {
-        console.log('Animating Home Out');
-        tlHomeOut.play();
+        //        console.log('Animating Home Out');
+        tlHomeOut.play(0);
     }
 
     function animateAboutIn() {
-        console.log('Animating About In');
-        tlAboutIn.play();
+        //        console.log('Animating About In');
+        tlAboutIn.play(0);
     }
 
     function animateAboutOut() {
-        console.log('Animating About Out');
-        tlAboutOut.play();
+        //        console.log('Animating About Out');
+        tlAboutOut.play(0);
     }
 
     function animateWorksIn() {
-        console.log('Animating Works In');
-        tlWorksIn.play();
+        //        console.log('Animating Works In');
+        tlWorksIn.play(0);
     }
+
+    function animateWorksOut() {
+        //        console.log('Animating Works Out');
+        tlWorksOut.play(0);
+    }
+
+    function animateContactIn() {
+        //        console.log('Animating Contact In');
+        tlContactIn.play(0);
+    }
+
+    function animateContactOut() {
+        //        console.log('Animating Contact Out');
+        tlContactOut.play(0);
+    }
+
 
     animateIntroIn();
 
     // Prev and Next State
 
     var currentState = 0;
+    var workDetailState = 0;
 
-    function prev_page() {
+    function prevState() {
         if(currentState - 1 > 0) {
             currentState--;
         } else {
             currentState = 1;
         }
         console.log('current page:'+currentState);
+
+        if(currentState == 1) {
+            animateAboutOut();
+
+            setTimeout(function() {
+                animateHomeIn();
+            }, 2500);
+        } else if(currentState == 2) {
+            animateWorksOut();
+
+            setTimeout(function() {
+                animateAboutIn();
+            }, 2500);
+        } else if(currentState == 3) {
+            animateContactOut();
+
+            setTimeout(function() {
+                animateWorksIn();
+            }, 2500);
+        }
     }
 
     function nextState() {
@@ -178,6 +238,7 @@ jQuery(document).ready(function($) {
             animateIntroOut();
 
             setTimeout(function() {
+                animateHeaderIn();
                 animateHomeIn();
             }, 2500);
         } else if(currentState == 2) {
@@ -191,6 +252,12 @@ jQuery(document).ready(function($) {
 
             setTimeout(function() {
                 animateWorksIn();
+            }, 2500);
+        } else if(currentState == 4) {
+            animateWorksOut();
+
+            setTimeout(function() {
+                animateContactIn();
             }, 2500);
         }
     }
@@ -206,7 +273,10 @@ jQuery(document).ready(function($) {
            || tlAboutIn.isActive() 
            || tlAboutOut.isActive() 
            || tlWorksIn.isActive() 
-           || tlWorksOut.isActive()) {
+           || tlWorksOut.isActive() 
+           || tlContactIn.isActive() 
+           || tlContactOut.isActive() 
+           || workDetailState == 1) {
 
             console.log('Animation is active');
             return false;
@@ -216,10 +286,20 @@ jQuery(document).ready(function($) {
             if(e.originalEvent.wheelDelta / 120 > 0) {
                 console.log('scrolling up!');
 
-                var current = $('.iterator.current');
+                if(currentState >= 1) {
+                    var current = $('.iterator.current');
+
+                    if(current.hasClass('current')) {
+                        setTimeout(function(){
+                            current.prev().addClass('current');
+                            current.removeClass('current');
+                        }, 2000);
+                    }
+                }
+
+                prevState();
 
             } else {
-
                 console.log('scrolling down!');
 
                 if(currentState >= 1) {
@@ -244,37 +324,113 @@ jQuery(document).ready(function($) {
     });
 
     workItem.on('click', function() {
+        workDetailState = 1;
+
         let workID = $(this).attr('id'),
             workDetail = $('#work-'+workID),
-            workDetailTitle = workDetail.find('.work-detail-title'),
-            workTypeLabel = workDetail.find('.type-label'),
-            workTypeList = workDetail.find('.type-list'),
-            workRoleLabel = workDetail.find('.role-label'),
-            workRoleList = workDetail.find('.role-list'),
-            workDetailLink = workDetail.find('.work-detail-link'),
-            workDetailImage = workDetail.find('.work-image'),
-            workTransition = $('.work-transition'),
-            tlWorkTransition = new TimelineMax({ paused: true });
+            workDetailNav = workDetail.find('.work-detail-nav'),
+            workDetailContainer = workDetail.find('.work-detail-container'),
+            workDetailImage = workDetail.find('.work-detail-image'),
+            workTransition = $('.work-transition');
 
-        console.log('work detail: #work-'+workID);
+        //        console.log('work detail: #work-'+workID);
 
-        tlWorkTransition
-            .to(workTransition, 0, { display: "block" })
-            .fromTo(workTransition, 1, { top: "-100vh" }, { top: "0", ease: "smoothEase" }, 0.2)
-            .to(workDetail, 1, { display: "block", ease: "smoothEase" }, 0.4)
-//            .from(workDetailTitle, 0.5, { y: "-50", ease: "smoothEase" }, 0.5)
-//            .from(workTypeLabel, 0.5, { y: "-50", ease: "smoothEase" }, 0.7)
-//            .from(workTypeList, 0.5, { y: "-50", ease: "smoothEase" }, 0.7)
-//            .from(workRoleLabel, 0.5, { y: "-50", ease: "smoothEase" }, 0.7)
-//            .from(workRoleList, 0.5, { y: "-50", ease: "smoothEase" }, 0.7)
-//            .from(workDetailLink, 0.5, { y: "-50", ease: "smoothEase" }, 0.7)
-            .staggerFrom(workDetailImage, 0.5, { y: "-20", ease: "smoothEase" }, 0.1);
+        workDetail.addClass('active-work');
 
-        tlWorkTransition.play();
+        TweenMax.to(workTransition, 0, { display: "block" });
+        TweenMax.to(workTransition, 1, { top: "0", ease: "smoothEase", delay: 0.5 });
+        TweenMax.to(workDetail, 2, { top: "0", ease: "smoothEase", delay: 0.7 });
 
         setTimeout(function() {
-            $('body').addClass('work-detail-body');
-        }, 1000);
+            $('#work-'+workID).niceScroll({
+                smoothscroll: true,
+                scrollspeed: 180,
+                cursorcolor: "#a5486d",
+                cursorwidth: "10px",
+                background: "rgba(255,255,255,0.6)",
+                cursorborder: "none",
+            });
+        }, 2500);
+    });
+
+    $('.works-back').on('click', function(e) {
+        e.preventDefault();
+        workDetailState = 0;
+
+        let workTransition = $('.work-transition'),
+            activeWorkDetail = $('.work-detail.active-work');
+
+        TweenMax.to(activeWorkDetail, 2, { top: "100vh", ease: "smoothEase", delay: 0.5 });
+        TweenMax.to(workTransition, 1, { top: "100vh", ease: "smoothEase", delay: 0.7 });
+        TweenMax.to(workTransition, 0, { display: "none", delay: 1 });
+
+        setTimeout(function() {
+            activeWorkDetail.removeClass('active-work');
+        }, 3000);
+
+    });
+
+    $('.iterator').on('click', function(e) {
+        e.preventDefault();
+        $('.iterator').removeClass('current');
+
+        let newState = $(this).attr('data-state');
+
+        console.log('Getting current state: ' + currentState);
+        console.log('Getting next state: ' + newState);
+
+        switch (currentState) {
+            case 1:
+            case '1':
+                animateHomeOut();
+                break;
+            case 2: 
+            case '2': 
+                animateAboutOut();
+                break;
+            case 3: 
+            case '3': 
+                animateWorksOut();
+                break;
+            case 4: 
+            case '4': 
+                animateContactOut();
+                break;
+            default: 
+                console.log('default');
+        }
+
+        setTimeout(function() {
+            switch (newState) {
+                case 1:
+                case '1':
+                    animateHomeIn();
+                    currentState = 1;
+                    $('.iterator-banner').addClass('current');
+                    break;
+                case 2: 
+                case '2': 
+                    animateAboutIn();
+                    currentState = 2;
+                    $('.iterator-about').addClass('current');
+                    break;
+                case 3: 
+                case '3': 
+                    animateWorksIn();
+                    currentState = 3;
+                    $('.iterator-works').addClass('current');
+                    break;
+                case 4: 
+                case '4': 
+                    animateContactIn();
+                    currentState = 4;
+                    $('.iterator-contact').addClass('current');
+                    break;
+                default: 
+                    console.log('default');
+            }
+        }, 2500);
+
     });
 
 });
