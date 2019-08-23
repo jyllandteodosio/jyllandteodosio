@@ -19,6 +19,54 @@ jQuery(document).ready(function($) {
         };
     }
 
+    function swipeDetect(el, callback){
+
+        var touchsurface = el,
+            swipedir,
+            startX,
+            startY,
+            distX,
+            distY,
+            threshold = 150, //required min distance traveled to be considered swipe
+            restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+            allowedTime = 300, // maximum time allowed to travel that distance
+            allowedTapTime = 100, // maximum time allowed for tap
+            elapsedTime,
+            startTime,
+            handleswipe = callback || function(swipedir){}
+
+        touchsurface.addEventListener('touchstart', function(e){
+            var touchobj = e.changedTouches[0]
+            swipedir = 'none'
+            dist = 0
+            startX = touchobj.pageX
+            startY = touchobj.pageY
+            startTime = new Date().getTime() // record time when finger first makes contact with surface
+            e.preventDefault();
+        }, false);
+
+        touchsurface.addEventListener('touchmove', function(e){
+            e.preventDefault(); // prevent scrolling when inside DIV
+        }, false);
+
+        touchsurface.addEventListener('touchend', function(e){
+            var touchobj = e.changedTouches[0]
+            distX = touchobj.pageX - startX; // get horizontal dist traveled by finger while in contact with surface
+            distY = touchobj.pageY - startY; // get vertical dist traveled by finger while in contact with surface
+            elapsedTime = new Date().getTime() - startTime; // get time elapsed
+            if (elapsedTime <= allowedTime){ // first condition for swipe met
+                if (Math.abs(distX) >= threshold && Math.abs(distY) <= restraint){ // 2nd condition for horizontal swipe met
+                    swipedir = (distX < 0)? 'left' : 'right'; // if dist traveled is negative, it indicates left swipe
+                }
+                else if (Math.abs(distY) >= threshold && Math.abs(distX) <= restraint){ // 2nd condition for vertical swipe met
+                    swipedir = (distY < 0)? 'up' : 'down'; // if dist traveled is negative, it indicates up swipe
+                }
+            }
+            handleswipe(swipedir);
+            e.preventDefault();
+        }, false);
+    }
+
     CustomEase.create("smoothEase", "M0,0c0.2,0.6,0.1,1,1,1");
 
 
@@ -80,8 +128,8 @@ jQuery(document).ready(function($) {
         .to(transitionSection, 0.5, { display: "none" });
 
     tlHeaderIn
-        .from(siteLogo, 0.7, { opacity: 0, y: "-20", ease: "smoothEase" }, 0.6)
-        .staggerFrom(iterator, 0.5, { opacity: 0, y: "-20", ease: "smoothEase" }, 0.1);
+        .staggerFrom(iterator, 0.5, { opacity: 0, y: "-20", ease: "smoothEase" }, 0.1)
+        .from(siteLogo, 0.7, { opacity: 0, y: "-20", ease: "smoothEase" }, 0);
 
     tlHomeIn
         .to(bannerSection, 0, { display: "block" })
@@ -203,7 +251,7 @@ jQuery(document).ready(function($) {
         } else {
             currentState = 1;
         }
-        console.log('current page:'+currentState);
+        //        console.log('current page:'+currentState);
 
         if(currentState == 1) {
             animateAboutOut();
@@ -232,7 +280,7 @@ jQuery(document).ready(function($) {
         } else {
             currentState = 4;
         }
-        console.log('currentState:'+currentState);
+        //        console.log('currentState:'+currentState);
 
         if(currentState == 1) {
             animateIntroOut();
@@ -264,8 +312,42 @@ jQuery(document).ready(function($) {
 
     // Scroll Events
 
-    $(window).bind('mousewheel DOMMouseScroll', debounce(function(e){
-        console.log('scrolling detected!');
+    // For desktop devices
+    $(window).bind('mousewheel', debounce(function(e){
+        //        console.log('scrolling detected!');
+        var scrollDir = '';
+
+        if(e.originalEvent.wheelDelta / 120 > 0) {
+            //            console.log('scrolling up!');
+            scrollDir = 'up';
+            animationManager(scrollDir);
+        } else {
+            //            console.log('scrolling down!');
+            scrollDir = 'down';
+            animationManager(scrollDir);
+        }
+
+    }, 1000));
+
+    // For mobile devices
+    var el = document.getElementById('main');
+
+    swipeDetect(el, function(swipeDir){
+        //        alert('swiping detected!');
+        var scrollDir = '';
+
+        if (swipeDir == 'up') {
+            //            alert('swiping up!');
+            scrollDir = 'down'; // Set to opposite for mobile
+            animationManager(scrollDir);
+        } else if(swipeDir == 'down') {
+            //            alert('swiping down!');
+            scrollDir = 'up'; // Set to opposite for mobile
+            animationManager(scrollDir);
+        }
+    });
+
+    function animationManager(scrollDirection) {
 
         if(tlIntroOut.isActive() 
            || tlHomeIn.isActive()
@@ -283,9 +365,7 @@ jQuery(document).ready(function($) {
 
         } else {
 
-            if(e.originalEvent.wheelDelta / 120 > 0) {
-                console.log('scrolling up!');
-
+            if(scrollDirection == 'up') {
                 if(currentState >= 1) {
                     var current = $('.iterator.current');
 
@@ -299,9 +379,7 @@ jQuery(document).ready(function($) {
 
                 prevState();
 
-            } else {
-                console.log('scrolling down!');
-
+            } else if(scrollDirection == 'down') {
                 if(currentState >= 1) {
                     var current = $('.iterator.current');
 
@@ -316,29 +394,28 @@ jQuery(document).ready(function($) {
                 nextState();
             }
         }
-    }, 1000));
+    }
 
     workItem.on('mouseenter', function() {
         let workHighlight = $(this).find('.works-border');
         TweenMax.fromTo(workHighlight, 1, { width: 0 }, { width: "100px" });
     });
 
-    workItem.on('click', function() {
+    function workDetailAnimation(workID) {
         workDetailState = 1;
 
-        let workID = $(this).attr('id'),
-            workDetail = $('#work-'+workID),
+        let workDetail = $('#work-'+workID),
             workDetailNav = workDetail.find('.work-detail-nav'),
             workDetailContainer = workDetail.find('.work-detail-container'),
             workDetailImage = workDetail.find('.work-detail-image'),
             workTransition = $('.work-transition');
 
-        //        console.log('work detail: #work-'+workID);
+        //        alert('work detail: #work-'+workID);
 
         workDetail.addClass('active-work');
-
         TweenMax.to(workTransition, 0, { display: "block" });
         TweenMax.to(workTransition, 1, { top: "0", ease: "smoothEase", delay: 0.5 });
+        TweenMax.to(workDetail, 0, { display: "block", delay: 0.5 });
         TweenMax.to(workDetail, 2, { top: "0", ease: "smoothEase", delay: 0.7 });
 
         setTimeout(function() {
@@ -351,24 +428,115 @@ jQuery(document).ready(function($) {
                 cursorborder: "none",
             });
         }, 2500);
+    }
+
+    var workItemMobile = document.getElementById('main');
+
+    workItemMobile.addEventListener('touchstart', function(e){
+    }, false);
+
+    workItemMobile.addEventListener('touchend', function(e){
+        //        alert(e.changedTouches[0].target.id);
+        var itemID = e.changedTouches[0].target.id;
+        if(itemID != 'main' && itemID != '') {
+            workDetailAnimation(itemID);
+        }
+
+        //        var paths = e.path;
+        //
+        //        for(var p = 0; p < paths.length; p++) {
+        //            if(paths[p].className == 'works-item') {
+        //                var itemID = paths[p].id;
+        //                workDetailAnimation(itemID);
+        //            }
+        //        }
+    }, false);
+
+    $('.works-item').on('click', function() {
+        workID = $(this).attr('id');
+        workDetailAnimation(workID);
     });
 
-    $('.works-back').on('click', function(e) {
-        e.preventDefault();
+    function worksBackAnimation() {
         workDetailState = 0;
 
         let workTransition = $('.work-transition'),
             activeWorkDetail = $('.work-detail.active-work');
 
-        TweenMax.to(activeWorkDetail, 2, { top: "100vh", ease: "smoothEase", delay: 0.5 });
-        TweenMax.to(workTransition, 1, { top: "100vh", ease: "smoothEase", delay: 0.7 });
-        TweenMax.to(workTransition, 0, { display: "none", delay: 1 });
+        TweenMax.to(activeWorkDetail, 3, { top: "1500px", ease: "smoothEase", delay: 1 });
+        TweenMax.to(activeWorkDetail, 0, { display: "none", delay: 3 });
+        TweenMax.to(workTransition, 3, { top: "1500px", ease: "smoothEase", delay: 1.2 });
+        TweenMax.to(workTransition, 0, { display: "none", delay: 3.5 });
 
         setTimeout(function() {
             activeWorkDetail.removeClass('active-work');
         }, 3000);
+    }
 
+    var worksBackMobile = document.querySelectorAll('.works-back');
+
+    for(var w = 0; w < worksBackMobile.length; w++) {
+        worksBackMobile[w].addEventListener('touchstart', function(e){
+        }, false);
+
+        worksBackMobile[w].addEventListener('touchend', function(e){
+            worksBackAnimation();
+        }, false);
+    }
+
+    $('.works-back').on('click', function(e) {
+        e.preventDefault();
+        worksBackAnimation();
     });
+
+    var linkMobile = document.querySelectorAll('.work-detail-link, .social');
+
+    for(var i = 0; i < linkMobile.length; i++) {
+        linkMobile[i].addEventListener('touchstart', function(e){
+        }, false);
+
+        linkMobile[i].addEventListener('touchend', function(e){
+            var elType = e.changedTouches[0].target.localName;
+            var elClass = e.changedTouches[0].target.className;
+            var linkURL = '';
+            var linkTarget = '';
+
+            if(elType == 'a' && elClass == 'social' || elClass == 'work-detail-link'){
+                linkURL = e.changedTouches[0].target.href;
+                linkTarget = e.changedTouches[0].target.target;
+
+                if(linkURL != '') {
+                    window.open(linkURL, linkTarget);
+                }
+            } else if(elType == 'i') {
+                var parentElement = e.changedTouches[0].target.parentElement;
+                var parentClass = e.changedTouches[0].target.parentElement.className;
+
+                if(parentClass.match('social')) {
+                    linkURL = e.changedTouches[0].target.parentElement.href;
+                    linkTarget = e.changedTouches[0].target.parentElement.target;
+
+                    if(linkURL != '') {
+                        window.open(linkURL, linkTarget);
+                    }
+                }
+
+            } else {
+                var paths = e.path;
+
+                for(var p = 0; p < paths.length; p++) {
+                    if(paths[p].localName == 'a' && paths[p].className == 'social' || paths[p].className == 'work-detail-link') {
+                        linkURL = paths[p].href;
+                        linkTarget = paths[p].target;
+
+                        if(linkURL != '') {
+                            window.open(linkURL, linkTarget);
+                        }
+                    }
+                }
+            }
+        }, false);
+    }
 
     $('.iterator').on('click', function(e) {
         e.preventDefault();
@@ -376,8 +544,8 @@ jQuery(document).ready(function($) {
 
         let newState = $(this).attr('data-state');
 
-        console.log('Getting current state: ' + currentState);
-        console.log('Getting next state: ' + newState);
+        //        console.log('Getting current state: ' + currentState);
+        //        console.log('Getting next state: ' + newState);
 
         switch (currentState) {
             case 1:
@@ -432,5 +600,7 @@ jQuery(document).ready(function($) {
         }, 2500);
 
     });
+
+    $('.vh100').css('height', $(window).height());
 
 });

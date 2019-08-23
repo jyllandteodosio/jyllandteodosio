@@ -8,7 +8,9 @@ body {
     color: #ffffff;
     margin: 0;
     height: 100%;
+    width: 100%;
     overflow: hidden;
+    position: fixed;
 
     &.work-detail-body {
         background-color: #eeeeee;
@@ -56,6 +58,13 @@ section {
 .nicescroll-rails {
     z-index: 999 !important;
 }
+
+//.site-main {
+//    width: 100vw;
+//    height: 100vh;
+//    overflow-y: scroll;
+//    -webkit-overflow-scrolling: touch; /* enables “momentum” (smooth) scrolling */
+//}
 
 
 //* Header
@@ -136,6 +145,7 @@ section {
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
     height: 100vh;
     width: 100vw;
     background-color: #333;
@@ -298,6 +308,7 @@ section {
 
     .works-item {
         margin: 40px 0;
+        cursor: pointer;
 
         .works-title {
             font-weight: 600;
@@ -306,7 +317,6 @@ section {
             transition: .3s ease;
             margin: 0;
             display: inline-block;
-            cursor: pointer;
 
             h3 {
                 margin: 0;
@@ -335,8 +345,9 @@ section {
 
 .work-transition {
     position: absolute;
-    top: 100vh;
+    top: 1500px;
     left: 0;
+    right: 0;
     height: 100vh;
     width: 100vw;
     background-color: #333;
@@ -366,15 +377,13 @@ section {
     }
 }
 
-.work-detail:not(:first-of-type) {
-}
-
 .work-detail {
     position: absolute;
-    z-index: 3;
-    top: 100vh;
+    z-index: 4;
+    top: 1500px;
     background-color: #333;
     height: 100vh;
+    display: none;
 
 
     .wrap {
@@ -548,7 +557,7 @@ section {
     height: 100vh;
     justify-content: center;
     text-align: center;
-    
+
     .section-title {
         margin-top: 100px;
         margin-bottom: 80px;
@@ -556,7 +565,7 @@ section {
         font-size: 48px;
         opacity: .5;
     }
-    
+
     .home-link {
         font-weight: 600;
         color: $rose1;
@@ -709,6 +718,10 @@ section {
     }
 
     .contact-section {
+        .wrap {
+            display: block;
+        }
+        
         .section-title {
             font-size: 48px;
         }
@@ -716,35 +729,37 @@ section {
         .contact-container {
             font-size: 24px;
         }
+        
+        .contact-social-wrap {
+            margin-top: 40px;
+        }
     }
 }
 
 @include mq('505px') {
     .site-header .wrap {
         flex-wrap: wrap;
-        margin-top: 40px;
+        margin-top: 20px;
+    } 
+
+    .site-logo {
+        font-size: 18px;
+        margin: 0;
+        padding: 17px 0 23px;
     }
 
-    .site-logo,
     .navigation-container {
-        flex-basis: 100%;
-        text-align: center;
-    }
-
-    .navigation-container {
-        justify-content: center;
+        flex-basis: 94%;
     }
 
     .navigation li.iterator {
-        min-width: 70px;
+        min-width: 0;
+        min-height: 0;
         padding: 20px 10px;
         font-size: 14px;
     }
 
     .banner-section {
-        .banner-container {
-            text-align: center;
-        }
 
         .banner-logo {
             font-size: 36px;
@@ -756,6 +771,11 @@ section {
     }
 
     .about-section {
+        .wrap {
+            align-items: start;
+            margin-top: 100px;
+        }
+
         .section-title {
             font-size: 36px;
         }
@@ -763,19 +783,16 @@ section {
         .about-container p {
             font-size: 18px;
         }
-
-        .about-wrap {
-            text-align: center;
-        }
     }
 
     .works-section {
-        .section-title {
-            font-size: 36px;
+        .wrap {
+            align-items: start;
+            margin-top: 100px;
         }
 
-        .works-container {
-            text-align: center;
+        .section-title {
+            font-size: 36px;
         }
 
         .works-item {
@@ -788,6 +805,16 @@ section {
     }
 
     .work-detail {
+        .work-detail-logo {
+            font-size: 18px;
+            margin: 20px 0;
+        }
+
+        .works-back {
+            font-size: 14px;
+            margin: 20px 0;
+        }
+
         .work-detail-container {
             margin: 0 0 60px;
         }
@@ -802,7 +829,11 @@ section {
         }
 
         .work-detail-nav {
-            margin: 40px;
+            margin: 20px 40px;
+        }
+        
+        .work-detail-link {
+            font-size: 16px;
         }
 
         .detail-content {
@@ -811,14 +842,24 @@ section {
     }
 
     .contact-section {
-        .section-title {
-            font-size: 36px;
-            margin-top: 120px;
+        .wrap {
+            align-items: start;
+            margin-top: 100px;
         }
 
-        .contact-social li {
-            margin-right: 0;
-            margin: 0 30px;
+        .section-title {
+            font-size: 36px;
+            margin-top: 150px;
+        }
+
+        .contact-social {
+            li {
+                margin-right: 30px;
+            }
+
+            a {
+                font-size: 24px;
+            }
         }
 
         .contact-container {
