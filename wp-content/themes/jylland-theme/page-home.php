@@ -8,7 +8,7 @@ get_header(); ?>
 
 <main id="main" class="site-main" role="main">
 
-    <section class="transition-section">
+    <section class="transition-section vh100">
         <div class="logo-intro-wrap">
             <div class="logo-intro">jt</div>
             <div class="logo-intro-bg"></div>
@@ -18,7 +18,7 @@ get_header(); ?>
     </section>
 
     <section class="banner-section" id="home">
-        <div class="wrap">
+        <div class="wrap vh100">
             <div class="banner-container">
                 <div class="banner-logo">
                     <?php echo get_field('banner_logo'); ?>
@@ -32,7 +32,7 @@ get_header(); ?>
     </section>
 
     <section class="about-section" id="about">
-        <div class="wrap">
+        <div class="wrap vh100">
             <div class="about-wrap">
                 <h2 class="section-title">
                     <div class="about-title-wrap">about</div>
@@ -45,10 +45,10 @@ get_header(); ?>
     </section>
 
     <section class="works-section" id="works">
-        <div class="wrap">
+        <div class="wrap vh100">
             <div class="works-container">
                 <h2 class="section-title">
-                    <div class="works-title-wrap">works</div>
+                    <div class="works-title-wrap" id="works-title">works</div>
                 </h2>
                 <div class="works-wrap">
 
@@ -67,7 +67,7 @@ get_header(); ?>
 
                     <div class="works-item" id="<?php echo get_the_ID();?>">
                         <div class="works-title">
-                            <h3><?php echo get_the_title(); ?></h3>
+                            <h3 id="<?php echo get_the_ID();?>"><?php echo get_the_title(); ?></h3>
                             <div class="works-border"></div>
                         </div>
                     </div>
@@ -85,14 +85,14 @@ get_header(); ?>
         </div>
     </section>
 
-    <section class="work-transition"></section>
+    <section class="work-transition vh100"></section>
 
     <?php 
     if( $works_query->have_posts() ):
     while( $works_query->have_posts() ): $works_query->the_post();
     ?>
 
-    <section class="work-detail" id="work-<?php echo get_the_ID();?>">
+    <section class="work-detail vh100" id="work-<?php echo get_the_ID();?>">
 
         <div class="work-detail-nav">
 
@@ -164,7 +164,7 @@ get_header(); ?>
     ?>
 
     <section class="contact-section" id="contact">
-        <div class="wrap">
+        <div class="wrap vh100">
             <div class="contact-wrap">
                 <h2 class="section-title">
                     <div class="contact-title-wrap">contact</div>
